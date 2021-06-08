@@ -1,23 +1,48 @@
+import {KeyboardEvent} from 'react'
+import {Editor, Transforms, Element} from 'slate'
+import {ReactEditor} from 'slate-react'
+
+
 enum AUXILIARY_ENUM {
-    altKey = 'altKey',
-    shiftKey = 'shiftKey',
-    ctrlKey = 'ctrlKey'
+    ALT_KEY = 'altKey',
+    SHIFT_KEY = 'shiftKey',
+    CTRL_KEY = 'ctrlKey',
+    META_KEY= 'metaKey'
 }
 enum KEY_ENUM {
-    enter = 13,
-    del = 8
+    ENTER = 'Enter',
+    DEL = 'Backspace'
 }
-const KeyMap = {}
 
-export default function keyDownHandle(event:KeyboardEvent) {
-    const key = []
-    const auxiliaryKeys: AUXILIARY_ENUM[] = [AUXILIARY_ENUM.altKey, AUXILIARY_ENUM.shiftKey, AUXILIARY_ENUM.ctrlKey]
-    auxiliaryKeys.forEach((auxiliaryKey) => {
-        if ((event)[auxiliaryKey]) {
-            key.push(auxiliaryKey)
-        }
+const initKeyMap = new Map<any, Function>()
+
+initKeyMap.set(AUXILIARY_ENUM.SHIFT_KEY + KEY_ENUM.ENTER, (editor: ReactEditor) => {
+    Transforms.unwrapNodes(editor, {
+        match: n => {
+            return !Editor.isEditor(n) && Element.isElement(n) && n.type === 'title'
+        },
+        split: true
     })
+    Transforms.setNodes(editor, {
+        type: '',
+        children: []
+    })
+})
 
+initKeyMap.set(AUXILIARY_ENUM.META_KEY + KEY_ENUM.ENTER, (editor: ReactEditor) => {
+    Editor.addMark(editor, 'bold', true)
+})
+
+
+const keyDownHandle = (event: KeyboardEvent, editor: ReactEditor) => {
+    const assistKeys = [AUXILIARY_ENUM.CTRL_KEY, AUXILIARY_ENUM.SHIFT_KEY, AUXILIARY_ENUM.META_KEY, AUXILIARY_ENUM.ALT_KEY]
+    const keys = assistKeys.reduce((sum, key) => {
+        return sum + (event[key] ? key : '')
+    }, '')
+    if (initKeyMap.has(keys + event.key)) {
+        event.preventDefault();
+        const fn = initKeyMap.get(keys + event.key)
+        fn && fn(editor)
+    }
 }
-
-export {}
+export default keyDownHandle

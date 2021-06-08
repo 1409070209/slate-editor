@@ -1,21 +1,18 @@
-import React from "react";
+import React, {CSSProperties} from 'react'
 import {RenderLeafProps} from "slate-react";
+import {MARK_TYPE_ENUM} from '../../../enum'
 
 export default function Leaf(props: RenderLeafProps): JSX.Element {
     let { attributes, children, leaf } = props
-    if (leaf.bold) {
-        children = <strong>{children}</strong>
+    let cssProperties: CSSProperties = {}
+    if (!children) children = <></>
+    for (const markTypeEnumKey in MARK_TYPE_ENUM) {
+        if (leaf.hasOwnProperty(markTypeEnumKey)) {
+            if (leaf[markTypeEnumKey]) {
+                cssProperties = Object.assign(cssProperties, leaf[markTypeEnumKey])
+            }
+        }
     }
-    if (leaf.code) {
-        children = <code>{children}</code>
-    }
-    if (leaf.italic) {
-        children = <em>{children}</em>
-    }
-    if (leaf.underline) {
-        children = <u>{children}</u>
-    }
-
-    return <span {...attributes}>{children}</span>
+    return <span {...attributes} style={cssProperties}>{children}</span>
 }
 
