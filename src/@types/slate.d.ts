@@ -13,6 +13,6 @@ declare module 'slate' {
         underline?: boolean;
         color?: CSSProperties;
         background?: CSSProperties;
-        [key: string]: boolean | CSSProperties
+        [key: MarkTypeEnum]: boolean | CSSProperties
     }
 }

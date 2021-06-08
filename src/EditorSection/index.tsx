@@ -6,6 +6,7 @@ import Leaf from './component/Leaf/Leaf'
 import keyDownHandle from '../KeyEvent'
 import StyleButton from '../ActionSection/StyleButton'
 import {MARK_TYPE_ENUM} from '../enum'
+import {BgColorsOutlined, BoldOutlined, FontColorsOutlined, ItalicOutlined, UnderlineOutlined} from '@ant-design/icons'
 
 export default function EditorSection (props: {nodes: Descendant[], setNodeList:(value: Descendant[]) => void}) {
     const {
@@ -30,10 +31,11 @@ export default function EditorSection (props: {nodes: Descendant[], setNodeList:
     }, [])
     return <div className={'slate-editor'}>
         <Slate value={nodes} editor={editor} onChange={setNodeList}>
-            <StyleButton type={MARK_TYPE_ENUM.bold} value={{fontWeight: 'bold'}}/>
-            <StyleButton type={MARK_TYPE_ENUM.italic} value={{textDecoration: 'underline'}}/>
-            <StyleButton type={MARK_TYPE_ENUM.color} value={{color: 'green'}}/>
-            <StyleButton type={MARK_TYPE_ENUM.background} value={{background: 'red'}}/>
+            <StyleButton icon={<BoldOutlined />} type={MARK_TYPE_ENUM.bold} value={{fontWeight: 'bold'}}/>
+            <StyleButton icon={<ItalicOutlined />} type={MARK_TYPE_ENUM.italic} value={{fontStyle: 'oblique'}}/>
+            <StyleButton icon={<UnderlineOutlined />} type={MARK_TYPE_ENUM.underline} value={{textDecoration: 'underline'}}/>
+            <StyleButton icon={<FontColorsOutlined />} type={MARK_TYPE_ENUM.color} value={{color: 'green'}}/>
+            <StyleButton icon={<BgColorsOutlined />} type={MARK_TYPE_ENUM.background} value={{background: 'red'}}/>
             <hr/>
             <br/><br/>
             <Editable
