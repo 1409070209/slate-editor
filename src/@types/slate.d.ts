@@ -1,18 +1,22 @@
 import {BaseElement, BaseText} from "slate";
 import {CSSProperties} from 'react'
 
+declare const ElementTypes = {
+    orderList: 'orderList',
+    listItem: 'listItem'
+}
+export declare type ElementType = typeof ElementTypes[string]
 declare module 'slate' {
     export interface BaseElement {
-        type?: string;
-        params?: any
+        type?: ElementType,
     }
     export interface BaseText {
-        bold?: boolean;
-        code?: boolean;
-        italic?: boolean;
-        underline?: boolean;
+        bold?: CSSProperties;
+        code?: CSSProperties;
+        italic?: CSSProperties;
+        underline?: CSSProperties;
         color?: CSSProperties;
         background?: CSSProperties;
-        [key: MarkTypeEnum]: boolean | CSSProperties
+        orderList?: Array;
     }
 }

@@ -4,5 +4,14 @@ export enum MARK_TYPE_ENUM {
     italic = 'italic',
     underline = 'underline',
     color = 'color',
-    background = 'background'
+    background = 'background',
 }
+
+export enum PARAGRAPH_TYPE_ENUM {
+    orderList = 'orderList',
+    listItem = 'listItem',
+    table = 'table',
+    tableData = 'tableData',
+    unOrderList = 'unOrderList'
+}
+

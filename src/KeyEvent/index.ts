@@ -19,20 +19,12 @@ const initKeyMap = new Map<any, Function>()
 initKeyMap.set(AUXILIARY_ENUM.SHIFT_KEY + KEY_ENUM.ENTER, (editor: ReactEditor) => {
     Transforms.unwrapNodes(editor, {
         match: n => {
-            return !Editor.isEditor(n) && Element.isElement(n) && n.type === 'title'
+            return !Editor.isEditor(n) && Element.isElement(n) && Object.prototype.hasOwnProperty.call(n,'type')
         },
         split: true
     })
-    Transforms.setNodes(editor, {
-        type: '',
-        children: []
-    })
+    Transforms.unsetNodes(editor, 'type')
 })
-
-initKeyMap.set(AUXILIARY_ENUM.META_KEY + KEY_ENUM.ENTER, (editor: ReactEditor) => {
-    Editor.addMark(editor, 'bold', true)
-})
-
 
 const keyDownHandle = (event: KeyboardEvent, editor: ReactEditor) => {
     const assistKeys = [AUXILIARY_ENUM.CTRL_KEY, AUXILIARY_ENUM.SHIFT_KEY, AUXILIARY_ENUM.META_KEY, AUXILIARY_ENUM.ALT_KEY]

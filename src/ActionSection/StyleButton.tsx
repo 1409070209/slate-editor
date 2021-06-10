@@ -2,7 +2,7 @@ import React, {CSSProperties} from 'react'
 import {useSlate} from 'slate-react'
 import {BaseEditor, Editor} from 'slate'
 import {Button} from 'antd'
-import {MARK_TYPE_ENUM} from '../../enum'
+import {MARK_TYPE_ENUM} from '../enum'
 
 interface IStyleButtonProps {
     type: MARK_TYPE_ENUM,
@@ -10,10 +10,10 @@ interface IStyleButtonProps {
     icon?: React.ReactNode
 }
 
-const isMarkActive = (editor: BaseEditor, format: MARK_TYPE_ENUM) => {
+const isMarkActive = (editor: BaseEditor, type: MARK_TYPE_ENUM) => {
     if (!editor.selection) return false
     const masks = Editor.marks(editor)
-    return masks ? masks[format] : false
+    return masks ? masks[type] : false
 }
 const switchMark = (editor: BaseEditor, type: MARK_TYPE_ENUM, value: CSSProperties) => {
     const isType = isMarkActive(editor, type)
@@ -36,3 +36,4 @@ export default function StyleButton(props: IStyleButtonProps): JSX.Element {
         {type}
     </Button>
 }
+
