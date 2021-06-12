@@ -12,6 +12,8 @@ export enum PARAGRAPH_TYPE_ENUM {
     listItem = 'listItem',
     table = 'table',
     tableData = 'tableData',
-    unOrderList = 'unOrderList'
+    unOrderList = 'unOrderList',
+    image = 'image',
+    link = 'link'
 }
 

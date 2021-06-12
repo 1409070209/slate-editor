@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './App.css';
 import EditorSection from "./EditorSection";
-import {BaseElement, BaseText, Descendant} from 'slate'
+import {Descendant} from 'slate'
 import {Table, TableProps} from 'antd'
 
 
@@ -15,11 +15,15 @@ function App() {
     if (nodes.length < 1) {
         // 确保编辑器存在可编辑的区域
         setNodeList([
-            ...nodes,
             {
                 children: [{text: ''}]
             }
         ])
+    }
+    if (Object.prototype.hasOwnProperty.call(nodes[nodes.length - 1], 'type')) {
+        setNodeList(nodes.concat({
+            children: [{text: ''}]
+        }))
     }
     const tableConfig:TableProps<Descendant> = {
         columns: [
@@ -32,7 +36,9 @@ function App() {
                 title: '节点value',
                 dataIndex: 'children',
                 key: 'children',
-                render: value => JSON.stringify(value)
+                render: value => (
+                    <p style={{width: 300, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>{JSON.stringify(value)}</p>
+                ),
             }
         ],
         pagination: false,

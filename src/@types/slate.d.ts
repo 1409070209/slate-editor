@@ -6,9 +6,17 @@ declare const ElementTypes = {
     listItem: 'listItem'
 }
 export declare type ElementType = typeof ElementTypes[string]
+
+export interface IHrefProps {
+    style: CSSProperties,
+    url: string
+    text?: string
+}
 declare module 'slate' {
     export interface BaseElement {
         type?: ElementType,
+        url?: string,
+        css?: CSSProperties[]
     }
     export interface BaseText {
         bold?: CSSProperties;

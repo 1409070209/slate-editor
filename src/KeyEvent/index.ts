@@ -1,6 +1,7 @@
 import {KeyboardEvent} from 'react'
 import {Editor, Transforms, Element} from 'slate'
 import {ReactEditor} from 'slate-react'
+import {PARAGRAPH_TYPE_ENUM} from '../enum'
 
 
 enum AUXILIARY_ENUM {
@@ -14,16 +15,20 @@ enum KEY_ENUM {
     DEL = 'Backspace'
 }
 
-const initKeyMap = new Map<any, Function>()
+const initKeyMap = new Map<any, (editor: ReactEditor, event: KeyboardEvent) => boolean>()
 
-initKeyMap.set(AUXILIARY_ENUM.SHIFT_KEY + KEY_ENUM.ENTER, (editor: ReactEditor) => {
-    Transforms.unwrapNodes(editor, {
-        match: n => {
-            return !Editor.isEditor(n) && Element.isElement(n) && Object.prototype.hasOwnProperty.call(n,'type')
-        },
-        split: true
+initKeyMap.set(KEY_ENUM.ENTER, (editor: ReactEditor, event: KeyboardEvent) => {
+    const [node] = Editor.nodes(editor, {
+        match: node => {
+            return !Editor.isEditor(node) && Element.isElement(node) && node.type === PARAGRAPH_TYPE_ENUM.link
+        }
     })
-    Transforms.unsetNodes(editor, 'type')
+    if (node) {
+        Transforms.insertNodes(editor, {children: [{text: ''}]})
+        event.preventDefault()
+    }
+    return false;
+
 })
 
 const keyDownHandle = (event: KeyboardEvent, editor: ReactEditor) => {
@@ -32,9 +37,9 @@ const keyDownHandle = (event: KeyboardEvent, editor: ReactEditor) => {
         return sum + (event[key] ? key : '')
     }, '')
     if (initKeyMap.has(keys + event.key)) {
-        event.preventDefault();
         const fn = initKeyMap.get(keys + event.key)
-        fn && fn(editor)
+        const flag = fn && fn(editor, event)
+        if (flag) event.preventDefault()
     }
 }
 export default keyDownHandle

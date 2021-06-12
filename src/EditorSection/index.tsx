@@ -1,45 +1,70 @@
 import React, {useCallback, useMemo} from 'react'
 import {Editable, ReactEditor, RenderElementProps, RenderLeafProps, Slate, withReact} from 'slate-react'
 import {createEditor, Descendant} from 'slate'
-import Leaf from './component/Leaf'
-import keyDownHandle from '../KeyEvent'
-import StyleButton from '../ActionSection/StyleButton'
+import Leaf from './Leaf'
 import {MARK_TYPE_ENUM, PARAGRAPH_TYPE_ENUM} from '../enum'
 import {
     BgColorsOutlined,
-    BoldOutlined,
+    BoldOutlined, CameraOutlined,
     FontColorsOutlined,
     ItalicOutlined,
     OrderedListOutlined,
-    UnderlineOutlined, UnorderedListOutlined
+    UnderlineOutlined,
+    UnorderedListOutlined
 } from '@ant-design/icons'
-import ComponentButton from '../ActionSection/ComponentButton'
+import BlockButton from '../ActionSection/BlockButton'
 import {withHistory} from 'slate-history'
+import withHref from '../Plugin/WithHref'
+import ImageButton from '../ActionSection/ImageButton'
+import keyDownHandle from '../KeyEvent'
+import StyleButton from '../ActionSection/StyleButton'
+import {ImageBlock} from './component/Image'
+import Href from './component/Href'
+
+const plugins = [
+    withReact,
+    withHistory,
+    withHref
+]
 
 export default function EditorSection (props: {nodes: Descendant[], setNodeList:(value: Descendant[]) => void}) {
     const {
         nodes, setNodeList
     } = props
     const editor = useMemo(() => {
-        return withHistory(withReact(createEditor() as ReactEditor))
+        return plugins.reduce((editor, plugin) => {
+            return plugin(editor)
+        }, createEditor() as ReactEditor)
     }, [])
 
     const render = (props: RenderElementProps):JSX.Element => {
-        switch (props.element.type) {
+        let {
+            element, attributes, children
+        } = props
+        const css = element.css ? element.css.reduce((css, cssItem) => Object.assign(css, cssItem), {}) : {};
+        attributes = Object.assign(attributes, {style: css})
+        switch (element.type) {
             case PARAGRAPH_TYPE_ENUM.orderList: {
-                return <ol {...props.attributes}>{props.children}</ol>
+                return <ol {...attributes}>{children}</ol>
             }
             case PARAGRAPH_TYPE_ENUM.unOrderList: {
-                return <ul {...props.attributes}>{props.children}</ul>
+                return <ul {...attributes}>{children}</ul>
             }
             case PARAGRAPH_TYPE_ENUM.listItem: {
-                return <li {...props.attributes}>{props.children}</li>
+                return <li {...attributes}>{children}</li>
+            }
+            case PARAGRAPH_TYPE_ENUM.image: {
+                return <ImageBlock {...props} children={props.children}/>
+            }
+            case PARAGRAPH_TYPE_ENUM.link: {
+                return <Href {...props}  children={props.children}/>
             }
             default: {
-                return <p {...props.attributes}>{props.children}</p>
+                return <p {...attributes}>{children}</p>
             }
         }
     }
+    console.log(nodes)
     const renderLeaf = useCallback((props:RenderLeafProps) => {
         return <Leaf {...props} children={props.children}/>
     }, [])
@@ -51,8 +76,9 @@ export default function EditorSection (props: {nodes: Descendant[], setNodeList:
             <StyleButton icon={<UnderlineOutlined />} type={MARK_TYPE_ENUM.underline} value={{textDecoration: 'underline'}}/>
             <StyleButton icon={<FontColorsOutlined />} type={MARK_TYPE_ENUM.color} value={{color: 'green'}}/>
             <StyleButton icon={<BgColorsOutlined />} type={MARK_TYPE_ENUM.background} value={{background: 'red'}}/>
-            <ComponentButton icon={<OrderedListOutlined />} type={PARAGRAPH_TYPE_ENUM.orderList} value={[]} />
-            <ComponentButton icon={<UnorderedListOutlined />} type={PARAGRAPH_TYPE_ENUM.unOrderList} value={[]} />
+            <BlockButton icon={<OrderedListOutlined />} type={PARAGRAPH_TYPE_ENUM.orderList} value={[]} />
+            <BlockButton icon={<UnorderedListOutlined />} type={PARAGRAPH_TYPE_ENUM.unOrderList} value={[]} />
+            <ImageButton icon={<CameraOutlined />} type={PARAGRAPH_TYPE_ENUM.image} />
             <hr/>
             <Editable
                 renderElement={render}

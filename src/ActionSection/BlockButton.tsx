@@ -11,7 +11,7 @@ export interface IComponentButtonProps {
     icon?: React.ReactNode
 }
 
-const isComponentActive = (editor: BaseEditor, type: PARAGRAPH_TYPE_ENUM) => {
+const isBlockActive = (editor: BaseEditor, type: PARAGRAPH_TYPE_ENUM) => {
     let nodes = Editor.nodes(editor, {
         match: n => {
             return !Editor.isEditor(n) && Element.isElement(n) && n.type === type
@@ -26,8 +26,8 @@ const paragraphChildrenType = new Map()
 paragraphChildrenType.set(PARAGRAPH_TYPE_ENUM.orderList, PARAGRAPH_TYPE_ENUM.listItem)
 paragraphChildrenType.set(PARAGRAPH_TYPE_ENUM.unOrderList, PARAGRAPH_TYPE_ENUM.listItem)
 
-const switchComponentType = (editor: BaseEditor, type: PARAGRAPH_TYPE_ENUM, value: object[]) => {
-    const isType = isComponentActive(editor, type)
+const switchBlockType = (editor: BaseEditor, type: PARAGRAPH_TYPE_ENUM, value: object[]) => {
+    const isType = isBlockActive(editor, type)
     const hasChild = paragraphChildrenType.has(type)
     // 如果是段落组件，就把属性解除
     Transforms.unwrapNodes(editor, {
@@ -52,7 +52,7 @@ const switchComponentType = (editor: BaseEditor, type: PARAGRAPH_TYPE_ENUM, valu
     }
 
 }
-export default function ComponentButton(props: IComponentButtonProps): JSX.Element {
+export default function BlockButton(props: IComponentButtonProps): JSX.Element {
     const {
         type, value, icon
     } = props
@@ -60,13 +60,13 @@ export default function ComponentButton(props: IComponentButtonProps): JSX.Eleme
 
     const mouseDownHandle = () => {
         if (!editor.selection) return
-        switchComponentType(editor, type, value)
+        switchBlockType(editor, type, value)
     }
     return <>
         <Button
             icon={icon}
             onMouseDown={mouseDownHandle}
-            type={isComponentActive(editor, type) ? 'primary' : 'text'}
+            type={isBlockActive(editor, type) ? 'primary' : 'text'}
         >
             {type}
         </Button>
