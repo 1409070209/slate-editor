@@ -13,7 +13,7 @@ interface IImageButtonProps {
 
 export default function ImageButton(props: IImageButtonProps): JSX.Element {
     const {
-        type
+        type, icon
     } = props
     const editor = useSlateStatic()
     const [url, setUrl] = useState('')
@@ -39,6 +39,6 @@ export default function ImageButton(props: IImageButtonProps): JSX.Element {
                 setUrl(e.target.value)}
             } value={url}/>
         </Modal>
-        <Button onMouseDown={mouseDownHandle} type={'text'}>{type}</Button>
+        <Button icon={icon} onMouseDown={mouseDownHandle} type={'text'}>{type}</Button>
     </>
 }

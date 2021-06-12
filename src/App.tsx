@@ -2,16 +2,13 @@ import React, {useState} from 'react'
 import './App.css';
 import EditorSection from "./EditorSection";
 import {Descendant} from 'slate'
-import {Table, TableProps} from 'antd'
+import {Table, TableProps, Tooltip} from 'antd'
+import initRichTexts from './init'
 
 
 function App() {
-    const [nodes, setNodeList] = useState<Descendant[]>([
-        {
-            children: [{text: 'this is text'}]
-        }
-    ])
-
+    const [nodes, setNodeList] = useState<Descendant[]>(initRichTexts)
+    console.log(JSON.stringify(nodes, null, 4))
     if (nodes.length < 1) {
         // 确保编辑器存在可编辑的区域
         setNodeList([
@@ -37,7 +34,11 @@ function App() {
                 dataIndex: 'children',
                 key: 'children',
                 render: value => (
-                    <p style={{width: 300, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>{JSON.stringify(value)}</p>
+                    <Tooltip color={'white'} title={<pre style={{color: 'black'}}>{JSON.stringify(value, null, 2)}</pre>}>
+                        <p style={{width: 300, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>
+                            {JSON.stringify(value)}
+                        </p>
+                    </Tooltip>
                 ),
             }
         ],

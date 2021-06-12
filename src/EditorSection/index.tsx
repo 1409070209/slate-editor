@@ -64,7 +64,6 @@ export default function EditorSection (props: {nodes: Descendant[], setNodeList:
             }
         }
     }
-    console.log(nodes)
     const renderLeaf = useCallback((props:RenderLeafProps) => {
         return <Leaf {...props} children={props.children}/>
     }, [])
