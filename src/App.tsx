@@ -8,7 +8,6 @@ import initRichTexts from './init'
 
 function App() {
     const [nodes, setNodeList] = useState<Descendant[]>(initRichTexts)
-    console.log(JSON.stringify(nodes, null, 4))
     if (nodes.length < 1) {
         // 确保编辑器存在可编辑的区域
         setNodeList([
@@ -27,15 +26,17 @@ function App() {
             {
                 title: '节点类型',
                 dataIndex: 'type',
-                key: 'type'
+                key: 'type',
+                width: 100
             },
             {
                 title: '节点value',
                 dataIndex: 'children',
                 key: 'children',
+                width: 100,
                 render: value => (
                     <Tooltip color={'white'} title={<pre style={{color: 'black'}}>{JSON.stringify(value, null, 2)}</pre>}>
-                        <p style={{width: 300, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>
+                        <p style={{width: 100, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>
                             {JSON.stringify(value)}
                         </p>
                     </Tooltip>

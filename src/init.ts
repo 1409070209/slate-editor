@@ -4,7 +4,7 @@ const initRichTexts: Descendant[] = [
     {
         "children": [
             {
-                "text": "使用Slate + TypeScript实现的数据驱动的富文本编辑器，暂时不支持代码高亮，使用类似Virtual Dom的机制和思想去实现编辑器功能.扩展性将更好"
+                "text": "使用Slate + TypeScript + React Hook + Antd实现的数据驱动的富文本编辑器，暂时不支持代码高亮，使用类似Virtual Dom的机制和思想去实现编辑器功能.扩展性将更好"
             }
         ]
     },
