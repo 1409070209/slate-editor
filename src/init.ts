@@ -91,31 +91,11 @@ const initRichTexts: Descendant[] = [
     {
         "children": [
             {
-                "text": ""
-            },
-            {
-                "type": "link",
-                "url": "  https://ant.design/components/icon-cn/",
-                "children": [
-                    {
-                        "text": "antd官网"
-                    }
-                ]
+                "link": "  https://ant.design/components/icon-cn/",
+                "text": "antd官网"
             },
             {
                 "text": " 点击即可访问"
-            },
-            {
-                "type": "link",
-                "url": "  https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg",
-                "children": [
-                    {
-                        "text": ""
-                    }
-                ]
-            },
-            {
-                "text": ""
             }
         ]
     },

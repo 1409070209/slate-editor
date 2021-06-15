@@ -19,7 +19,6 @@ import ImageButton from '../ActionSection/ImageButton'
 import keyDownHandle from '../KeyEvent'
 import StyleButton from '../ActionSection/StyleButton'
 import {ImageBlock} from './component/Image'
-import Href from './component/Href'
 
 const plugins = [
     withReact,
@@ -55,9 +54,6 @@ export default function EditorSection (props: {nodes: Descendant[], setNodeList:
             }
             case PARAGRAPH_TYPE_ENUM.image: {
                 return <ImageBlock {...props} children={props.children}/>
-            }
-            case PARAGRAPH_TYPE_ENUM.link: {
-                return <Href {...props}  children={props.children}/>
             }
             default: {
                 return <p {...attributes}>{children}</p>

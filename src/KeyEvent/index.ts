@@ -17,20 +17,6 @@ enum KEY_ENUM {
 
 const initKeyMap = new Map<any, (editor: ReactEditor, event: KeyboardEvent) => boolean>()
 
-initKeyMap.set(KEY_ENUM.ENTER, (editor: ReactEditor, event: KeyboardEvent) => {
-    const [node] = Editor.nodes(editor, {
-        match: node => {
-            return !Editor.isEditor(node) && Element.isElement(node) && node.type === PARAGRAPH_TYPE_ENUM.link
-        }
-    })
-    if (node) {
-        Transforms.insertNodes(editor, {children: [{text: ''}]})
-        event.preventDefault()
-    }
-    return false;
-
-})
-
 const keyDownHandle = (event: KeyboardEvent, editor: ReactEditor) => {
     const assistKeys = [AUXILIARY_ENUM.CTRL_KEY, AUXILIARY_ENUM.SHIFT_KEY, AUXILIARY_ENUM.META_KEY, AUXILIARY_ENUM.ALT_KEY]
     const keys = assistKeys.reduce((sum, key) => {

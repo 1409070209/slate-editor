@@ -5,6 +5,7 @@ export enum MARK_TYPE_ENUM {
     underline = 'underline',
     color = 'color',
     background = 'background',
+    link = 'link',
 }
 
 export enum PARAGRAPH_TYPE_ENUM {
@@ -14,6 +15,5 @@ export enum PARAGRAPH_TYPE_ENUM {
     tableData = 'tableData',
     unOrderList = 'unOrderList',
     image = 'image',
-    link = 'link'
 }
 

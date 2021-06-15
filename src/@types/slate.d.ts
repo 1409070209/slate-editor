@@ -3,7 +3,8 @@ import {CSSProperties} from 'react'
 
 declare const ElementTypes = {
     orderList: 'orderList',
-    listItem: 'listItem'
+    listItem: 'listItem',
+    link: 'link'
 }
 export declare type ElementType = typeof ElementTypes[string]
 
@@ -15,7 +16,7 @@ export interface IHrefProps {
 declare module 'slate' {
     export interface BaseElement {
         type?: ElementType,
-        url?: string,
+        url?: string
         css?: CSSProperties[]
     }
     export interface BaseText {
@@ -26,5 +27,6 @@ declare module 'slate' {
         color?: CSSProperties;
         background?: CSSProperties;
         orderList?: Array;
+        link?: string;
     }
 }

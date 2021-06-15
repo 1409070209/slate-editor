@@ -1,7 +1,9 @@
 import React, {CSSProperties} from 'react'
 import {RenderLeafProps} from 'slate-react'
 import {MARK_TYPE_ENUM} from '../enum'
+import Href from './component/Href'
 
+// TODO 应该把link转换成文本节点规避BUG
 export default function Leaf(props: RenderLeafProps): JSX.Element {
     let { attributes, children, leaf } = props
     let cssProperties: CSSProperties = {}
@@ -20,6 +22,10 @@ export default function Leaf(props: RenderLeafProps): JSX.Element {
     }
     if (leaf[MARK_TYPE_ENUM.background]) {
         cssProperties = Object.assign(cssProperties, leaf[MARK_TYPE_ENUM.background])
+    }
+    if (leaf.link){
+        // children = <a href={leaf.link}>{children}</a>
+        children = <Href {...props} children={props.children} />
     }
 
     return <span {...attributes} style={cssProperties}>{children}</span>
