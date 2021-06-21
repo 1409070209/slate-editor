@@ -5,7 +5,7 @@ import {DeleteOutlined, ShareAltOutlined} from '@ant-design/icons'
 import {BaseSelection, Editor, Text, Range, Node, Transforms} from 'slate'
 import {getMark} from '../../Util'
 import {MARK_TYPE_ENUM} from '../../enum'
-// TODO 渲染应该以text为准
+
 export default function Href(props: RenderLeafProps): JSX.Element {
     let {children, leaf, attributes} = props
     let {
@@ -20,7 +20,6 @@ export default function Href(props: RenderLeafProps): JSX.Element {
             for (const entry of nodeEntry) {
                 const [node, at] = entry
                 if (Text.isText(node) && getMark(node, MARK_TYPE_ENUM.link)){
-                    console.log(node)
                     Transforms.setSelection(editor, {
                         anchor: {
                             offset: 0,

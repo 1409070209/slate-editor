@@ -1,4 +1,4 @@
-import {BaseElement, BaseText} from "slate";
+import {BaseElement, BaseText, BasePoint} from "slate";
 import {CSSProperties} from 'react'
 
 declare const ElementTypes = {

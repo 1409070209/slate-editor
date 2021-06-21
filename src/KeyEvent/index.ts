@@ -1,7 +1,6 @@
 import {KeyboardEvent} from 'react'
-import {Editor, Transforms, Element} from 'slate'
+import {Editor, Range, Text, Element, Selection, BaseText, Transforms} from 'slate'
 import {ReactEditor} from 'slate-react'
-import {PARAGRAPH_TYPE_ENUM} from '../enum'
 
 
 enum AUXILIARY_ENUM {
@@ -16,7 +15,6 @@ enum KEY_ENUM {
 }
 
 const initKeyMap = new Map<any, (editor: ReactEditor, event: KeyboardEvent) => boolean>()
-
 const keyDownHandle = (event: KeyboardEvent, editor: ReactEditor) => {
     const assistKeys = [AUXILIARY_ENUM.CTRL_KEY, AUXILIARY_ENUM.SHIFT_KEY, AUXILIARY_ENUM.META_KEY, AUXILIARY_ENUM.ALT_KEY]
     const keys = assistKeys.reduce((sum, key) => {
