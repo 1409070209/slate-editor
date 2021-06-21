@@ -7,7 +7,6 @@ declare const ElementTypes = {
     link: 'link'
 }
 export declare type ElementType = typeof ElementTypes[string]
-
 export interface IHrefProps {
     style: CSSProperties,
     url: string

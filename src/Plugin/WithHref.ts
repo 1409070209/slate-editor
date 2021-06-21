@@ -17,6 +17,11 @@ const withHref = (editor: ReactEditor) => {
             insertData(data)
         }
     }
+    editor.apply = operation => {
+        // console.log(editor.selection, operation)
+        apply(operation)
+        // console.log(editor.selection)
+    }
 
     editor.normalizeNode = entry => {
         const [node, path] = entry
