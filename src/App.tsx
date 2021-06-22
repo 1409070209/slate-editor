@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
 import './App.css';
 import EditorSection from "./EditorSection";
-import {Descendant} from 'slate'
+import {Descendant, Element} from 'slate'
 import {Table, TableProps, Tooltip} from 'antd'
 import initRichTexts from './init'
+import {getParagraphTypes, hasParagraphType} from './Util/paragraph'
 
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
             }
         ])
     }
-    if (Object.prototype.hasOwnProperty.call(nodes[nodes.length - 1], 'type')) {
+    if (getParagraphTypes(nodes[nodes.length - 1] as Element).length) {
         setNodeList(nodes.concat({
             children: [{text: ''}]
         }))
@@ -27,17 +28,21 @@ function App() {
                 title: '节点类型',
                 dataIndex: 'type',
                 key: 'type',
-                width: 100
+                width: 100,
+                render(val, data) {
+                    const types = Element.isElement(data) ? getParagraphTypes(data) : []
+                    return JSON.stringify(types)
+                }
             },
             {
                 title: '节点value',
                 dataIndex: 'children',
                 key: 'children',
                 width: 100,
-                render: value => (
-                    <Tooltip color={'white'} title={<pre style={{color: 'black'}}>{JSON.stringify(value, null, 2)}</pre>}>
+                render: (_, data) => (
+                    <Tooltip color={'white'} title={<pre style={{color: 'black'}}>{JSON.stringify(data, null, 2)}</pre>}>
                         <p style={{width: 100, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>
-                            {JSON.stringify(value)}
+                            {JSON.stringify(data)}
                         </p>
                     </Tooltip>
                 ),

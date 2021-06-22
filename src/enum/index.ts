@@ -11,8 +11,6 @@ export enum MARK_TYPE_ENUM {
 export enum PARAGRAPH_TYPE_ENUM {
     orderList = 'orderList',
     listItem = 'listItem',
-    table = 'table',
-    tableData = 'tableData',
     unOrderList = 'unOrderList',
     image = 'image',
 }

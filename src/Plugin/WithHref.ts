@@ -1,13 +1,12 @@
 import {ReactEditor} from 'slate-react'
 import {PARAGRAPH_TYPE_ENUM} from '../enum'
-import {insertHref, isUrl} from '../Util'
-import {Text, Element, Transforms} from 'slate'
+import {hasType, insertHref, isUrl} from '../Util'
+import {Element, Text, Transforms} from 'slate'
 
 const withHref = (editor: ReactEditor) => {
     const { insertData, isVoid, normalizeNode, apply } = editor
     editor.isVoid = element => {
-        return element.type === PARAGRAPH_TYPE_ENUM.image
-            ? true : isVoid(element)
+        return hasType(element, PARAGRAPH_TYPE_ENUM.image) ? true : isVoid(element)
     }
     editor.insertData = data => {
         const text = data.getData('text/plain')

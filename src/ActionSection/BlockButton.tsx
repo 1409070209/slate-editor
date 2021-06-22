@@ -3,6 +3,8 @@ import {useSlate} from 'slate-react'
 import {Button} from 'antd'
 import {PARAGRAPH_TYPE_ENUM} from '../enum'
 import {BaseEditor, BaseElement, Editor, Element, Transforms} from 'slate'
+import {hasType} from '../Util'
+import {hasParagraphType, paragraphChildrenType} from '../Util/paragraph'
 
 
 export interface IComponentButtonProps {
@@ -14,19 +16,20 @@ export interface IComponentButtonProps {
 const isBlockActive = (editor: BaseEditor, type: PARAGRAPH_TYPE_ENUM) => {
     let nodes = Editor.nodes(editor, {
         match: n => {
-            return !Editor.isEditor(n) && Element.isElement(n) && n.type === type
+            return !Editor.isEditor(n) && Element.isElement(n) && hasType(n, type)
         }
     })
     for (const nodeElement of nodes) {
-        if ((nodeElement[0] as BaseElement).type === type) return true
+        const node = nodeElement[0]
+        if (Element.isElement(node)) {
+            return hasType(node, type)
+        }
     }
     return false
 }
-const paragraphChildrenType = new Map()
-paragraphChildrenType.set(PARAGRAPH_TYPE_ENUM.orderList, PARAGRAPH_TYPE_ENUM.listItem)
-paragraphChildrenType.set(PARAGRAPH_TYPE_ENUM.unOrderList, PARAGRAPH_TYPE_ENUM.listItem)
 
-const switchBlockType = (editor: BaseEditor, type: PARAGRAPH_TYPE_ENUM, value: object[]) => {
+
+const switchBlockType = (editor: BaseEditor, type: PARAGRAPH_TYPE_ENUM, value: object = {}) => {
     const isType = isBlockActive(editor, type)
     const hasChild = paragraphChildrenType.has(type)
     // 如果是段落组件，就把属性解除
@@ -35,19 +38,26 @@ const switchBlockType = (editor: BaseEditor, type: PARAGRAPH_TYPE_ENUM, value: o
         match: node => {
             return !Editor.isEditor(node)
                 && Element.isElement(node)
-                && paragraphChildrenType.has(node.type)
+                && hasParagraphType(node)
         }
     })
     if (isType) {
-        Transforms.unsetNodes(editor, 'type')
+        Transforms.unsetNodes(editor, paragraphChildrenType.get(type) as PARAGRAPH_TYPE_ENUM)
     } else {
-        Transforms.setNodes(editor, {
-            type: hasChild ? paragraphChildrenType.get(type): type
-        })
+        if (hasChild) {
+            Transforms.setNodes(editor, {
+                // hasChild属性确保了get函数的返回值
+                [paragraphChildrenType.get(type) as string] : value
+            })
+        } else {
+            Transforms.setNodes(editor, {
+                [type]: value
+            })
+        }
     }
     if (!isType && hasChild) {
         Transforms.wrapNodes(editor, {
-            type, children: []
+            [type]: value, children: []
         })
     }
 

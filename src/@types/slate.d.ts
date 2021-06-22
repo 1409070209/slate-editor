@@ -7,16 +7,25 @@ declare const ElementTypes = {
     link: 'link'
 }
 export declare type ElementType = typeof ElementTypes[string]
-export interface IHrefProps {
-    style: CSSProperties,
+
+// 为段落增加样式或者类名
+interface BaseTypeProps {
+    css?: CSSProperties,
+    className?: string,
+}
+export interface IHrefProps extends BaseTypeProps{
     url: string
-    text?: string
+}
+export interface IListItem extends BaseTypeProps {
+    children?: BaseText[]
 }
 declare module 'slate' {
+    // 将BaseElement.type重构成BaseText那样支持参数的样子
     export interface BaseElement {
-        type?: ElementType,
-        url?: string
-        css?: CSSProperties[]
+        orderList?: BaseTypeProps | []
+        listItem?: IListItem | []
+        unOrderList?: BaseTypeProps | []
+        image?: IHrefProps
     }
     export interface BaseText {
         bold?: CSSProperties;

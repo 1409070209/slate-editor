@@ -9,8 +9,9 @@ const initRichTexts: Descendant[] = [
         ]
     },
     {
-        "type": "image",
-        "url": "https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg",
+        "image": {
+            "url": "https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+        },
         "children": [
             {
                 "text": "https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
@@ -18,30 +19,7 @@ const initRichTexts: Descendant[] = [
         ]
     },
     {
-        "children": [
-            {
-                "text": "this is text",
-                "bold": {
-                    "fontWeight": "bold"
-                },
-                "italic": {
-                    "fontStyle": "oblique"
-                }
-            }
-        ]
-    },
-    {
-        "children": [
-            {
-                "text": "underline",
-                "underline": {
-                    "textDecoration": "underline"
-                }
-            }
-        ]
-    },
-    {
-        "type": "orderList",
+        "orderList": [],
         "children": [
             {
                 "children": [
@@ -49,67 +27,58 @@ const initRichTexts: Descendant[] = [
                         "text": "有顺序列表"
                     }
                 ],
-                "type": "listItem"
+                "listItem": []
             },
             {
-                "type": "listItem",
                 "children": [
                     {
-                        "text": "有顺序列表带加粗样式",
+                        "text": "有顺序列表加粗样式",
                         "bold": {
                             "fontWeight": "bold"
                         }
                     }
-                ]
+                ],
+                "listItem": []
             }
         ]
     },
     {
-        "type": "unOrderList",
+        "children": [
+            {
+                "bold": {
+                    "fontWeight": "bold"
+                },
+                "text": ""
+            }
+        ]
+    },
+    {
+        "unOrderList": [],
         "children": [
             {
                 "children": [
                     {
-                        "text": "无顺序列表"
-                    }
-                ],
-                "type": "listItem"
-            },
-            {
-                "type": "listItem",
-                "children": [
-                    {
-                        "text": "无顺序列表带样式",
-                        "color": {
-                            "color": "green"
+                        "text": "无顺序列表",
+                        "italic": {
+                            "fontStyle": "oblique"
                         }
                     }
-                ]
-            }
-        ]
-    },
-    {
-        "children": [
-            {
-                "link": "  https://ant.design/components/icon-cn/",
-                "text": "antd官网"
+                ],
+                "listItem": []
             },
             {
-                "text": " 点击即可访问"
-            }
-        ]
-    },
-    {
-        "children": [
-            {
-                "text": ""
-            }
-        ]
-    },
-    {
-        "children": [
-            {
-                "text": ""
+                "children": [
+                    {
+                        "italic": {
+                            "fontStyle": "oblique"
+                        },
+                        "text": "无顺序列表加颜色",
+                        "color": {
+                            "color": "rgb(235, 47, 150)"
+                        }
+                    }
+                ],
+                "listItem": []
             }
         ]
     }

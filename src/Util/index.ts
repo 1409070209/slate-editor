@@ -1,4 +1,4 @@
-import {BaseEditor, Editor, Element, Node, Text, Selection, Transforms} from 'slate'
+import {BaseEditor, Editor, Element, Node, Text, Selection, Transforms, BaseElement, BaseText} from 'slate'
 import {MARK_TYPE_ENUM, PARAGRAPH_TYPE_ENUM} from '../enum'
 import {message} from 'antd'
 import {ReactEditor} from 'slate-react'
@@ -39,12 +39,19 @@ export const insertImage = (editor: BaseEditor, url: string, selection?: Selecti
     }
     // 如果指定了位置就在特定位置插入
     Transforms.insertNodes(editor, {
-        type: PARAGRAPH_TYPE_ENUM.image, url, children: [{text: url}]
+        [PARAGRAPH_TYPE_ENUM.image]: {
+            url,
+        },
+        children: [{text: url}]
     }, {
         at: selection || editor.selection || Editor.end(editor, [])
     })
 }
 
-export const getMark = (element: Node, type: MARK_TYPE_ENUM) => {
-    return Text.isText(element) && Object.prototype.hasOwnProperty.call(element, type)
+export const getMark = (element: BaseText, type: MARK_TYPE_ENUM) => {
+    return Object.prototype.hasOwnProperty.call(element, type)
+}
+
+export const hasType = (element: BaseElement, type: PARAGRAPH_TYPE_ENUM) => {
+    return Object.prototype.hasOwnProperty.call(element, type)
 }

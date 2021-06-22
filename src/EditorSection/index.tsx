@@ -40,25 +40,18 @@ export default function EditorSection (props: {nodes: Descendant[], setNodeList:
         let {
             element, attributes, children
         } = props
-        const css = element.css ? element.css.reduce((css, cssItem) => Object.assign(css, cssItem), {}) : {};
-        attributes = Object.assign(attributes, {style: css})
-        switch (element.type) {
-            case PARAGRAPH_TYPE_ENUM.orderList: {
-                return <ol {...attributes}>{children}</ol>
-            }
-            case PARAGRAPH_TYPE_ENUM.unOrderList: {
-                return <ul {...attributes}>{children}</ul>
-            }
-            case PARAGRAPH_TYPE_ENUM.listItem: {
-                return <li {...attributes}>{children}</li>
-            }
-            case PARAGRAPH_TYPE_ENUM.image: {
-                return <ImageBlock {...props} children={props.children}/>
-            }
-            default: {
-                return <p {...attributes}>{children}</p>
-            }
+        if (element[PARAGRAPH_TYPE_ENUM.orderList]) {
+            children = <ol {...attributes}>{children}</ol>
+        } else if (element[PARAGRAPH_TYPE_ENUM.unOrderList]) {
+            children = <ul {...attributes}>{children}</ul>
+        } else if (element[PARAGRAPH_TYPE_ENUM.listItem]) {
+            children = <li {...attributes}>{children}</li>
+        } else if (element[PARAGRAPH_TYPE_ENUM.image]) {
+            children = <ImageBlock {...props} children={props.children}/>
+        } else {
+            children = <div {...attributes}>{children}</div>
         }
+        return children
     }
     const renderLeaf = useCallback((props:RenderLeafProps) => {
         return <Leaf {...props} children={props.children}/>
