@@ -49,7 +49,7 @@ export default function EditorSection (props: {nodes: Descendant[], setNodeList:
         } else if (element[PARAGRAPH_TYPE_ENUM.image]) {
             children = <ImageBlock {...props} children={props.children}/>
         } else {
-            children = <div {...attributes}>{children}</div>
+            children = <p {...attributes}>{children}</p>
         }
         return children
     }
