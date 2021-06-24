@@ -2,7 +2,6 @@ import React, { CSSProperties } from 'react'
 import { RenderLeafProps } from 'slate-react'
 
 import { MARK_TYPE_ENUM } from '../enum'
-import Href from './component/Href'
 
 console.log(123)
 // TODO 应该把link转换成文本节点规避BUG

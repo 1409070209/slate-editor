@@ -1,6 +1,7 @@
 import React from 'react'
-import {RenderElementProps, useFocused, useSelected} from 'slate-react'
-import {PARAGRAPH_TYPE_ENUM} from '../../enum'
+import { RenderElementProps, useFocused, useSelected } from 'slate-react'
+
+import { PARAGRAPH_TYPE_ENUM } from '../../enum'
 
 export function ImageBlock (props: RenderElementProps): JSX.Element {
     let {

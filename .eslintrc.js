@@ -7,7 +7,7 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
-    '@typescript-eslint/no-unused-vars': 'error'
+    '@typescript-eslint/no-unused-vars': 'warn'
   },
   env: {
     browser: true,

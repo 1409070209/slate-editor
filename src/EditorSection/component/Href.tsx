@@ -1,17 +1,18 @@
-import {DeleteOutlined, EditOutlined, ShareAltOutlined} from '@ant-design/icons'
-import {Button, Form, Input, Modal, Tooltip} from 'antd'
-import {useForm} from 'antd/es/form/Form.js'
-import React, {useEffect, useState} from 'react'
-import {BaseSelection, Editor, Selection, Transforms} from 'slate'
-import {ReactEditor, RenderElementProps, RenderLeafProps, useSlate, useSlateStatic} from 'slate-react'
-import {IHrefProps} from '../../@types/slate.js'
-import {PARAGRAPH_TYPE_ENUM} from '../../enum'
-import {hasType} from '../../Util'
+import { DeleteOutlined, EditOutlined, ShareAltOutlined } from '@ant-design/icons'
+import { Button, Form, Input, Modal, Tooltip } from 'antd'
+import { useForm } from 'antd/es/form/Form.js'
+import React, { useState } from 'react'
+import { BaseSelection, Editor, Selection, Transforms } from 'slate'
+import { ReactEditor, RenderElementProps, useSlate } from 'slate-react'
+
+import { IHrefProps } from '../../@types/slate.js'
+import { PARAGRAPH_TYPE_ENUM } from '../../enum'
+import { hasType } from '../../Util'
 
 let selection: Selection = null
 // TODO 将antd的Tooltip重构成新的组件，支持mouseout自动隐藏
 export default function Href(props: RenderElementProps): JSX.Element {
-    let {children, element, attributes} = props
+    let { children, element, attributes } = props
     let link = element[PARAGRAPH_TYPE_ENUM.link] as IHrefProps
     if (link === undefined) console.error(element, '没有link参数')
     const [visible, setVisible] = useState(false)
@@ -26,8 +27,8 @@ export default function Href(props: RenderElementProps): JSX.Element {
             const [node, at] = Editor.parent(editor, selection)
             if (!hasType(node, PARAGRAPH_TYPE_ENUM.link)) return
             Editor.withoutNormalizing(editor,() => {
-                Transforms.unsetNodes(editor, PARAGRAPH_TYPE_ENUM.link, {at})
-                Transforms.insertNodes(editor, {text: linkData.text}, {at})
+                Transforms.unsetNodes(editor, PARAGRAPH_TYPE_ENUM.link, { at })
+                Transforms.insertNodes(editor, { text: linkData.text }, { at })
             })
         }
     }
@@ -44,13 +45,13 @@ export default function Href(props: RenderElementProps): JSX.Element {
                 const [node, at] = Editor.parent(editor, selection)
                 if (hasType(node, PARAGRAPH_TYPE_ENUM.link)) {
                     Editor.withoutNormalizing(editor, () => {
-                        Transforms.delete(editor, {at: at})
+                        Transforms.delete(editor, { at: at })
                         Transforms.insertNodes(editor, [
                             {
-                                [PARAGRAPH_TYPE_ENUM.link]: {url: values.url, text: values.text},
-                                children: [ {text: ''} ]
+                                [PARAGRAPH_TYPE_ENUM.link]: { url: values.url, text: values.text },
+                                children: [ { text: '' } ]
                             }
-                        ], {at: at})
+                        ], { at: at })
                     })
                 }
             }
@@ -71,7 +72,7 @@ export default function Href(props: RenderElementProps): JSX.Element {
     </div>
     return <span {...attributes}>
         <Tooltip title={Edit} placement={'bottom'} color={'white'} trigger={'click'}>
-            <span style={{color: '#096DD9'}}>{linkData.text}</span>
+            <span style={{ color: '#096DD9' }}>{linkData.text}</span>
             <span>{children}</span>
         </Tooltip>
         <Modal {...modalConfig}>

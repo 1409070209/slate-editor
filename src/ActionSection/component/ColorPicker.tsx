@@ -1,5 +1,6 @@
 import React from 'react'
-import {colors} from './color'
+
+import { colors } from './color'
 interface IColorPicker {
     onColorChange: (color: string, e: React.MouseEvent) => void
 }

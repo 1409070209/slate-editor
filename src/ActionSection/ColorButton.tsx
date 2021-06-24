@@ -1,10 +1,11 @@
-import {DownOutlined} from '@ant-design/icons'
-import {Button, Dropdown} from 'antd'
-import React, {CSSProperties, useEffect, useState} from 'react'
-import {Editor} from 'slate'
-import {useSlate} from 'slate-react'
-import {MARK_TYPE_ENUM} from '../enum'
-import {switchMark} from '../Util'
+import { DownOutlined } from '@ant-design/icons'
+import { Button, Dropdown } from 'antd'
+import React, { CSSProperties, useEffect, useState } from 'react'
+import { Editor } from 'slate'
+import { useSlate } from 'slate-react'
+
+import { MARK_TYPE_ENUM } from '../enum'
+import { switchMark } from '../Util'
 import ColorPicker from './component/ColorPicker'
 interface IColorButtonProps {
     type: MARK_TYPE_ENUM.color | MARK_TYPE_ENUM.background,

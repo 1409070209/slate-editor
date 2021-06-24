@@ -1,5 +1,6 @@
-import {CSSProperties} from 'react'
-import {BaseElement, BasePoint, BaseText} from 'slate';
+import { CSSProperties } from 'react'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { BaseElement, BaseText } from 'slate';
 
 declare const ElementTypes = {
     orderList: 'orderList',

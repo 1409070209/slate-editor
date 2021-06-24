@@ -1,8 +1,9 @@
-import {message} from 'antd'
-import {CSSProperties} from 'react'
-import {BaseEditor, BaseElement, BaseText, Editor, Element, Node, Selection, Text, Transforms} from 'slate'
-import {ReactEditor} from 'slate-react'
-import {MARK_TYPE_ENUM, PARAGRAPH_TYPE_ENUM} from '../enum'
+import { message } from 'antd'
+import { CSSProperties } from 'react'
+import { BaseEditor, BaseElement, BaseText, Editor, Selection, Transforms } from 'slate'
+import { ReactEditor } from 'slate-react'
+
+import { MARK_TYPE_ENUM, PARAGRAPH_TYPE_ENUM } from '../enum'
 
 export const isUrl = (path: string) => {
     path = path.trim()
@@ -27,7 +28,7 @@ export const switchMark = (editor: BaseEditor, type: MARK_TYPE_ENUM, value?: CSS
 
 export const insertHref = (editor: ReactEditor, url: string) => {
     Transforms.insertNodes(editor, [
-        {link: {url, text: url}, children: [ {text: ''} ]},
+        { link: { url, text: url }, children: [ { text: '' } ] },
     ])
 }
 
@@ -42,7 +43,7 @@ export const insertImage = (editor: BaseEditor, url: string, selection?: Selecti
             [PARAGRAPH_TYPE_ENUM.image]: {
                 url,
             },
-            children: [{text: url}]
+            children: [{ text: url }]
         },
     ], {
         at: selection || editor.selection || Editor.end(editor, [])

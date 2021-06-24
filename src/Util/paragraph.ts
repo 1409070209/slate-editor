@@ -1,6 +1,7 @@
-import {BaseElement, BaseText} from 'slate'
-import {MARK_TYPE_ENUM, PARAGRAPH_TYPE_ENUM} from '../enum'
-import {getMark, hasType} from './index'
+import { BaseElement, BaseText } from 'slate'
+
+import { MARK_TYPE_ENUM, PARAGRAPH_TYPE_ENUM } from '../enum'
+import { getMark, hasType } from './index'
 
 
 export const paragraphChildrenType = new Map<PARAGRAPH_TYPE_ENUM, PARAGRAPH_TYPE_ENUM>()

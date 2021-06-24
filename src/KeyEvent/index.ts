@@ -1,6 +1,5 @@
-import {KeyboardEvent} from 'react'
-import {BaseText, Editor, Element, Range, Selection, Text, Transforms} from 'slate'
-import {ReactEditor} from 'slate-react'
+import { KeyboardEvent } from 'react'
+import { ReactEditor } from 'slate-react'
 
 
 enum AUXILIARY_ENUM {
@@ -8,10 +7,6 @@ enum AUXILIARY_ENUM {
     SHIFT_KEY = 'shiftKey',
     CTRL_KEY = 'ctrlKey',
     META_KEY= 'metaKey'
-}
-enum KEY_ENUM {
-    ENTER = 'Enter',
-    DEL = 'Backspace'
 }
 
 const initKeyMap = new Map<any, (editor: ReactEditor, event: KeyboardEvent) => boolean>()

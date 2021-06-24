@@ -1,7 +1,7 @@
 /* eslint-disable */
 import {Button, Input, message, Modal} from 'antd'
 import React, {ReactNode, useState} from 'react'
-import {Selection, Transforms} from 'slate'
+import {Selection} from 'slate'
 import {useSlateStatic} from 'slate-react'
 import {PARAGRAPH_TYPE_ENUM} from '../enum'
 import {insertImage, isUrl} from '../Util'

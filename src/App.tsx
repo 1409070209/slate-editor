@@ -1,10 +1,12 @@
-import {Table, TableProps, Tooltip} from 'antd'
-import React, {useState} from 'react'
-import {Descendant, Element} from 'slate'
 import './App.css';
+
+import { Table, TableProps, Tooltip } from 'antd'
+import React, { useState } from 'react'
+import { Descendant, Element } from 'slate'
+
 import EditorSection from './EditorSection';
 import initRichTexts from './init'
-import {getParagraphTypes, hasListType} from './Util/paragraph'
+import { getParagraphTypes } from './Util/paragraph'
 
 
 function App() {
@@ -13,13 +15,13 @@ function App() {
         // 确保编辑器存在可编辑的区域
         setNodeList([
             {
-                children: [{text: ''}]
+                children: [{ text: '' }]
             }
         ])
     }
     if (getParagraphTypes(nodes[nodes.length - 1] as Element).length) {
         setNodeList(nodes.concat({
-            children: [{text: ''}]
+            children: [{ text: '' }]
         }))
     }
     const tableConfig:TableProps<Descendant> = {
@@ -40,8 +42,8 @@ function App() {
                 key: 'children',
                 width: 100,
                 render: (_, data) => (
-                    <Tooltip color={'white'} title={<pre style={{color: 'black'}}>{JSON.stringify(data, null, 2)}</pre>}>
-                        <p style={{width: 100, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden'}}>
+                    <Tooltip color={'white'} title={<pre style={{ color: 'black' }}>{JSON.stringify(data, null, 2)}</pre>}>
+                        <p style={{ width: 100, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>
                             {JSON.stringify(data)}
                         </p>
                     </Tooltip>

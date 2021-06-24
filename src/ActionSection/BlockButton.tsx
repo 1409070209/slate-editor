@@ -1,10 +1,11 @@
-import {Button} from 'antd'
+import { Button } from 'antd'
 import React from 'react'
-import {BaseEditor, BaseElement, Editor, Element, Transforms} from 'slate'
-import {useSlate} from 'slate-react'
-import {PARAGRAPH_TYPE_ENUM} from '../enum'
-import {hasType} from '../Util'
-import {hasListType, paragraphChildrenType} from '../Util/paragraph'
+import { BaseEditor, Editor, Element, Transforms } from 'slate'
+import { useSlate } from 'slate-react'
+
+import { PARAGRAPH_TYPE_ENUM } from '../enum'
+import { hasType } from '../Util'
+import { hasListType, paragraphChildrenType } from '../Util/paragraph'
 
 
 export interface IComponentButtonProps {
