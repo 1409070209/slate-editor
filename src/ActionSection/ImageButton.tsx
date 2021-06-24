@@ -1,10 +1,10 @@
 /* eslint-disable */
-import React, {ReactNode, useState} from 'react'
 import {Button, Input, message, Modal} from 'antd'
-import {PARAGRAPH_TYPE_ENUM} from '../enum'
-import {useSlateStatic} from 'slate-react'
-import {insertImage, isUrl} from '../Util'
+import React, {ReactNode, useState} from 'react'
 import {Selection, Transforms} from 'slate'
+import {useSlateStatic} from 'slate-react'
+import {PARAGRAPH_TYPE_ENUM} from '../enum'
+import {insertImage, isUrl} from '../Util'
 
 interface IImageButtonProps {
     type: PARAGRAPH_TYPE_ENUM,

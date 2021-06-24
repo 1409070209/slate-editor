@@ -1,8 +1,8 @@
-import React from 'react'
-import {useSlate} from 'slate-react'
 import {Button} from 'antd'
-import {PARAGRAPH_TYPE_ENUM} from '../enum'
+import React from 'react'
 import {BaseEditor, BaseElement, Editor, Element, Transforms} from 'slate'
+import {useSlate} from 'slate-react'
+import {PARAGRAPH_TYPE_ENUM} from '../enum'
 import {hasType} from '../Util'
 import {hasListType, paragraphChildrenType} from '../Util/paragraph'
 

@@ -1,7 +1,7 @@
-import React, {CSSProperties} from 'react'
-import {useSlate} from 'slate-react'
-import {BaseEditor, Editor} from 'slate'
 import {Button} from 'antd'
+import React, {CSSProperties} from 'react'
+import {BaseEditor, Editor} from 'slate'
+import {useSlate} from 'slate-react'
 import {MARK_TYPE_ENUM} from '../enum'
 import {isMarkActive, switchMark} from '../Util'
 

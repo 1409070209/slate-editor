@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
-import './App.css';
-import EditorSection from "./EditorSection";
-import {Descendant, Element} from 'slate'
 import {Table, TableProps, Tooltip} from 'antd'
+import React, {useState} from 'react'
+import {Descendant, Element} from 'slate'
+import './App.css';
+import EditorSection from './EditorSection';
 import initRichTexts from './init'
 import {getParagraphTypes, hasListType} from './Util/paragraph'
 
@@ -53,7 +53,7 @@ function App() {
         dataSource: nodes
     }
     return (
-    <div className="App">
+    <div className='App'>
         <div className={'node-list'}>
             <Table {...tableConfig}/>
         </div>

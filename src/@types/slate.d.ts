@@ -1,5 +1,5 @@
-import {BaseElement, BaseText, BasePoint} from "slate";
 import {CSSProperties} from 'react'
+import {BaseElement, BasePoint, BaseText} from 'slate';
 
 declare const ElementTypes = {
     orderList: 'orderList',

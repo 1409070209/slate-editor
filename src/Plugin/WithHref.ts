@@ -1,7 +1,7 @@
+import {Editor, Element, Location, Text, Transforms} from 'slate'
 import {ReactEditor} from 'slate-react'
 import {PARAGRAPH_TYPE_ENUM} from '../enum'
 import {hasType, insertHref, isUrl} from '../Util'
-import {Editor, Element, Location, Text, Transforms} from 'slate'
 
 const withHref = (editor: ReactEditor) => {
     const { insertData, isVoid, normalizeNode, isInline, apply } = editor

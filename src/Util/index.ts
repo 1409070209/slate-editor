@@ -1,8 +1,8 @@
-import {BaseEditor, Editor, Element, Node, Text, Selection, Transforms, BaseElement, BaseText} from 'slate'
-import {MARK_TYPE_ENUM, PARAGRAPH_TYPE_ENUM} from '../enum'
 import {message} from 'antd'
-import {ReactEditor} from 'slate-react'
 import {CSSProperties} from 'react'
+import {BaseEditor, BaseElement, BaseText, Editor, Element, Node, Selection, Text, Transforms} from 'slate'
+import {ReactEditor} from 'slate-react'
+import {MARK_TYPE_ENUM, PARAGRAPH_TYPE_ENUM} from '../enum'
 
 export const isUrl = (path: string) => {
     path = path.trim()

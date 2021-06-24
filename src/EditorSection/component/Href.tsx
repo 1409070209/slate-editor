@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react'
-import {ReactEditor, RenderElementProps, RenderLeafProps, useSlate, useSlateStatic} from 'slate-react'
-import {Button, Form, Input, Modal, Tooltip} from 'antd'
 import {DeleteOutlined, EditOutlined, ShareAltOutlined} from '@ant-design/icons'
-import {BaseSelection, Editor, Selection, Transforms} from 'slate'
+import {Button, Form, Input, Modal, Tooltip} from 'antd'
 import {useForm} from 'antd/es/form/Form.js'
-import {PARAGRAPH_TYPE_ENUM} from '../../enum'
+import React, {useEffect, useState} from 'react'
+import {BaseSelection, Editor, Selection, Transforms} from 'slate'
+import {ReactEditor, RenderElementProps, RenderLeafProps, useSlate, useSlateStatic} from 'slate-react'
 import {IHrefProps} from '../../@types/slate.js'
+import {PARAGRAPH_TYPE_ENUM} from '../../enum'
 import {hasType} from '../../Util'
 
 let selection: Selection = null

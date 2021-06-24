@@ -1,8 +1,3 @@
-import React, {useCallback, useMemo} from 'react'
-import {Editable, ReactEditor, RenderElementProps, RenderLeafProps, Slate, withReact} from 'slate-react'
-import {createEditor, Descendant} from 'slate'
-import Leaf from './Leaf'
-import {MARK_TYPE_ENUM, PARAGRAPH_TYPE_ENUM, PARAGRAPH_TYPE_LIST} from '../enum'
 import {
     BgColorsOutlined,
     BoldOutlined, CameraOutlined,
@@ -11,17 +6,22 @@ import {
     OrderedListOutlined,
     UnderlineOutlined, UnorderedListOutlined
 } from '@ant-design/icons'
-import BlockButton from '../ActionSection/BlockButton'
+import React, {useCallback, useMemo} from 'react'
+import {createEditor, Descendant} from 'slate'
 import {withHistory} from 'slate-history'
-import withHref from '../Plugin/WithHref'
+import {Editable, ReactEditor, RenderElementProps, RenderLeafProps, Slate, withReact} from 'slate-react'
+import BlockButton from '../ActionSection/BlockButton'
+import ColorButton from '../ActionSection/ColorButton'
 import ImageButton from '../ActionSection/ImageButton'
 import StyleButton from '../ActionSection/StyleButton'
-import {ImageBlock} from './component/Image'
-import ColorButton from '../ActionSection/ColorButton'
+import {MARK_TYPE_ENUM, PARAGRAPH_TYPE_ENUM, PARAGRAPH_TYPE_LIST} from '../enum'
 import keyDownHandle from '../KeyEvent'
-import Href from './component/Href'
+import withHref from '../Plugin/WithHref'
 import {hasType} from '../Util'
+import Href from './component/Href'
+import {ImageBlock} from './component/Image'
 import './index.less'
+import Leaf from './Leaf'
 
 const plugins = [
     withReact,
@@ -83,7 +83,7 @@ export default function EditorSection (props: {nodes: Descendant[], setNodeList:
                 renderElement={render}
                 renderLeaf={renderLeaf}
                 onKeyDown={event => keyDownHandle(event, editor)}
-                placeholder="rich demo"
+                placeholder='rich demo'
                 spellCheck
                 autoFocus
             />

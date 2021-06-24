@@ -1,5 +1,5 @@
 import {KeyboardEvent} from 'react'
-import {Editor, Range, Text, Element, Selection, BaseText, Transforms} from 'slate'
+import {BaseText, Editor, Element, Range, Selection, Text, Transforms} from 'slate'
 import {ReactEditor} from 'slate-react'
 
 
