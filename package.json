@@ -33,15 +33,20 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
-    "fix": "eslint --fix --ext 'src/**/*{.ts,.tsx}'",
+    "eslint": "eslint src --ext .ts",
+    "lint": "tsc src/**/*.ts",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "src/**/*.js": [
-      "yarn run fix",
-      "prettier --write",
+    "src/**/*.{ts,tsx,jsx,vue}": [
+      "eslint --fix",
       "git add"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -70,6 +75,8 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-autofix": "^1.0.5",
     "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
