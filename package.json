@@ -34,7 +34,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
-    "eslint": "eslint src --ext .ts .tsx",
+    "eslint": "eslint --ext .tsx,.ts --fix ./src",
     "precommit": "lint-staged"
   },
   "lint-staged": {
@@ -45,7 +45,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "yarn run eslint && lint-staged"
     }
   },
   "eslintConfig": {
