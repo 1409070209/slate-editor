@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "./",
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
     "@craco/craco": "^6.1.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -33,13 +34,12 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
-    "eslint": "eslint src --ext .ts",
-    "lint": "tsc src/**/*.ts",
+    "eslint": "eslint src --ext .ts .tsx",
     "precommit": "lint-staged"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,jsx,vue}": [
-      "eslint --fix",
+      "eslint --ext .tsx,.ts --fix ./src",
       "git add"
     ]
   },
@@ -67,19 +67,15 @@
     ]
   },
   "devDependencies": {
-    "@ant-design/icons": "^4.6.2",
     "@types/react-color": "^3.0.4",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "@typescript-eslint/parser": "^4.28.0",
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-autofix": "^1.0.5",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-react": "^7.24.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-typescript": "^0.14.0",
     "husky": "^6.0.0",
-    "lint-staged": "^11.0.0",
-    "prettier": "^2.3.1"
+    "lint-staged": "^11.0.0"
   }
 }
