@@ -4,7 +4,7 @@ import {Button} from 'antd'
 import {PARAGRAPH_TYPE_ENUM} from '../enum'
 import {BaseEditor, BaseElement, Editor, Element, Transforms} from 'slate'
 import {hasType} from '../Util'
-import {hasParagraphType, paragraphChildrenType} from '../Util/paragraph'
+import {hasListType, paragraphChildrenType} from '../Util/paragraph'
 
 
 export interface IComponentButtonProps {
@@ -32,13 +32,13 @@ const isBlockActive = (editor: BaseEditor, type: PARAGRAPH_TYPE_ENUM) => {
 const switchBlockType = (editor: BaseEditor, type: PARAGRAPH_TYPE_ENUM, value: object = {}) => {
     const isType = isBlockActive(editor, type)
     const hasChild = paragraphChildrenType.has(type)
-    // 如果是段落组件，就把属性解除
+    // 如果是列表组件，就把属性解除
     Transforms.unwrapNodes(editor, {
         split: true,
         match: node => {
             return !Editor.isEditor(node)
                 && Element.isElement(node)
-                && hasParagraphType(node)
+                && hasListType(node)
         }
     })
     if (isType) {

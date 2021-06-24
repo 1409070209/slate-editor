@@ -23,10 +23,6 @@ export default function Leaf(props: RenderLeafProps): JSX.Element {
     if (leaf[MARK_TYPE_ENUM.background]) {
         cssProperties = Object.assign(cssProperties, leaf[MARK_TYPE_ENUM.background])
     }
-    if (leaf.link){
-        // children = <a href={leaf.link}>{children}</a>
-        children = <Href {...props} children={props.children} />
-    }
 
     return <span {...attributes} style={cssProperties}>{children}</span>
 }

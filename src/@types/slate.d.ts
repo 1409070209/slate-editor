@@ -14,6 +14,10 @@ interface BaseTypeProps {
     className?: string,
 }
 export interface IHrefProps extends BaseTypeProps{
+    url: string,
+    text: string
+}
+export interface IImageProps extends BaseTypeProps {
     url: string
 }
 export interface IListItem extends BaseTypeProps {
@@ -25,16 +29,17 @@ declare module 'slate' {
         orderList?: BaseTypeProps | []
         listItem?: IListItem | []
         unOrderList?: BaseTypeProps | []
-        image?: IHrefProps
+        image?: IImageProps
+        link?: IHrefProps,
     }
     export interface BaseText {
-        bold?: CSSProperties;
-        code?: CSSProperties;
-        italic?: CSSProperties;
-        underline?: CSSProperties;
-        color?: CSSProperties;
-        background?: CSSProperties;
-        orderList?: Array;
-        link?: string;
+        bold?: CSSProperties
+        code?: CSSProperties
+        italic?: CSSProperties
+        underline?: CSSProperties
+        color?: CSSProperties
+        background?: CSSProperties
+        orderList?: Array
+        text: string
     }
 }

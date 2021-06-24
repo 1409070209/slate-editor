@@ -1,12 +1,20 @@
 import {ReactEditor} from 'slate-react'
 import {PARAGRAPH_TYPE_ENUM} from '../enum'
 import {hasType, insertHref, isUrl} from '../Util'
-import {Element, Text, Transforms} from 'slate'
+import {Editor, Element, Location, Text, Transforms} from 'slate'
 
 const withHref = (editor: ReactEditor) => {
-    const { insertData, isVoid, normalizeNode, apply } = editor
+    const { insertData, isVoid, normalizeNode, isInline, apply } = editor
     editor.isVoid = element => {
-        return hasType(element, PARAGRAPH_TYPE_ENUM.image) ? true : isVoid(element)
+        return hasType(element, [
+            PARAGRAPH_TYPE_ENUM.image,
+            PARAGRAPH_TYPE_ENUM.link,
+        ]) ? true : isVoid(element)
+    }
+    editor.isInline = element => {
+        return hasType(element, [
+            PARAGRAPH_TYPE_ENUM.link,
+        ]) ? true : isInline(element)
     }
     editor.insertData = data => {
         const text = data.getData('text/plain')
@@ -17,9 +25,7 @@ const withHref = (editor: ReactEditor) => {
         }
     }
     editor.apply = operation => {
-        // console.log(editor.selection, operation)
         apply(operation)
-        // console.log(editor.selection)
     }
 
     editor.normalizeNode = entry => {

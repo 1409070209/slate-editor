@@ -2,7 +2,7 @@ import React, {useCallback, useMemo} from 'react'
 import {Editable, ReactEditor, RenderElementProps, RenderLeafProps, Slate, withReact} from 'slate-react'
 import {createEditor, Descendant} from 'slate'
 import Leaf from './Leaf'
-import {MARK_TYPE_ENUM, PARAGRAPH_TYPE_ENUM} from '../enum'
+import {MARK_TYPE_ENUM, PARAGRAPH_TYPE_ENUM, PARAGRAPH_TYPE_LIST} from '../enum'
 import {
     BgColorsOutlined,
     BoldOutlined, CameraOutlined,
@@ -19,6 +19,9 @@ import StyleButton from '../ActionSection/StyleButton'
 import {ImageBlock} from './component/Image'
 import ColorButton from '../ActionSection/ColorButton'
 import keyDownHandle from '../KeyEvent'
+import Href from './component/Href'
+import {hasType} from '../Util'
+import './index.less'
 
 const plugins = [
     withReact,
@@ -40,15 +43,23 @@ export default function EditorSection (props: {nodes: Descendant[], setNodeList:
         let {
             element, attributes, children
         } = props
+        // 为了支持嵌套，Void结点应该先于非Void节点挂载，以确保Image是ListItem的子元素
+        if (element[PARAGRAPH_TYPE_ENUM.image]) {
+            children = <ImageBlock {...props} children={props.children}/>
+        }
+        if (element[PARAGRAPH_TYPE_ENUM.link]) {
+            children = <Href {...props} children={props.children} />
+        }
         if (element[PARAGRAPH_TYPE_ENUM.orderList]) {
             children = <ol {...attributes}>{children}</ol>
-        } else if (element[PARAGRAPH_TYPE_ENUM.unOrderList]) {
+        }
+        if (element[PARAGRAPH_TYPE_ENUM.unOrderList]) {
             children = <ul {...attributes}>{children}</ul>
-        } else if (element[PARAGRAPH_TYPE_ENUM.listItem]) {
+        }
+        if (element[PARAGRAPH_TYPE_ENUM.listItem]) {
             children = <li {...attributes}>{children}</li>
-        } else if (element[PARAGRAPH_TYPE_ENUM.image]) {
-            children = <ImageBlock {...props} children={props.children}/>
-        } else {
+        }
+        if (!hasType(element, PARAGRAPH_TYPE_LIST)){
             children = <p {...attributes}>{children}</p>
         }
         return children
@@ -68,7 +79,7 @@ export default function EditorSection (props: {nodes: Descendant[], setNodeList:
             <BlockButton icon={<UnorderedListOutlined />} type={PARAGRAPH_TYPE_ENUM.unOrderList} value={[]} />
             <ImageButton icon={<CameraOutlined />} type={PARAGRAPH_TYPE_ENUM.image} />
             <hr/>
-            <Editable
+            <Editable className={'slate-editor-context'}
                 renderElement={render}
                 renderLeaf={renderLeaf}
                 onKeyDown={event => keyDownHandle(event, editor)}

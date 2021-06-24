@@ -7,7 +7,7 @@ export const paragraphChildrenType = new Map<PARAGRAPH_TYPE_ENUM, PARAGRAPH_TYPE
 paragraphChildrenType.set(PARAGRAPH_TYPE_ENUM.orderList, PARAGRAPH_TYPE_ENUM.listItem)
 paragraphChildrenType.set(PARAGRAPH_TYPE_ENUM.unOrderList, PARAGRAPH_TYPE_ENUM.listItem)
 
-export const hasParagraphType = (node: BaseElement) => {
+export const hasListType = (node: BaseElement) => {
     for (const keyValue of paragraphChildrenType) {
         const key = keyValue[0]
         if (hasType(node, key as PARAGRAPH_TYPE_ENUM)) return true

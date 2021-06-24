@@ -5,7 +5,6 @@ export enum MARK_TYPE_ENUM {
     underline = 'underline',
     color = 'color',
     background = 'background',
-    link = 'link',
 }
 
 export enum PARAGRAPH_TYPE_ENUM {
@@ -13,5 +12,14 @@ export enum PARAGRAPH_TYPE_ENUM {
     listItem = 'listItem',
     unOrderList = 'unOrderList',
     image = 'image',
+    link = 'link',
+}
+
+const PARAGRAPH_TYPE_LIST: string[] = []
+for (let key in PARAGRAPH_TYPE_ENUM) {
+    PARAGRAPH_TYPE_LIST.push(key)
+}
+export {
+    PARAGRAPH_TYPE_LIST
 }
 

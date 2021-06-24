@@ -4,7 +4,7 @@ import EditorSection from "./EditorSection";
 import {Descendant, Element} from 'slate'
 import {Table, TableProps, Tooltip} from 'antd'
 import initRichTexts from './init'
-import {getParagraphTypes, hasParagraphType} from './Util/paragraph'
+import {getParagraphTypes, hasListType} from './Util/paragraph'
 
 
 function App() {

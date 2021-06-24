@@ -27,8 +27,7 @@ export const switchMark = (editor: BaseEditor, type: MARK_TYPE_ENUM, value?: CSS
 
 export const insertHref = (editor: ReactEditor, url: string) => {
     Transforms.insertNodes(editor, [
-        {text: url, link: url},
-        {text: ''}
+        { link: { url, text: url }, children: [ {text: ''} ] },
     ])
 }
 
@@ -38,12 +37,14 @@ export const insertImage = (editor: BaseEditor, url: string, selection?: Selecti
         return
     }
     // 如果指定了位置就在特定位置插入
-    Transforms.insertNodes(editor, {
-        [PARAGRAPH_TYPE_ENUM.image]: {
-            url,
+    Transforms.insertNodes(editor, [
+        {
+            [PARAGRAPH_TYPE_ENUM.image]: {
+                url,
+            },
+            children: [{text: url}]
         },
-        children: [{text: url}]
-    }, {
+    ], {
         at: selection || editor.selection || Editor.end(editor, [])
     })
 }
@@ -52,6 +53,11 @@ export const getMark = (element: BaseText, type: MARK_TYPE_ENUM) => {
     return Object.prototype.hasOwnProperty.call(element, type)
 }
 
-export const hasType = (element: BaseElement, type: PARAGRAPH_TYPE_ENUM) => {
-    return Object.prototype.hasOwnProperty.call(element, type)
+export const hasType = (element: BaseElement, type: string | string[]) => {
+    if (type instanceof Array) {
+        return type.some(item => Object.prototype.hasOwnProperty.call(element, item))
+    } else {
+       return Object.prototype.hasOwnProperty.call(element, type)
+    }
 }
+
