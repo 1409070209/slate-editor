@@ -27,7 +27,7 @@ export const switchMark = (editor: BaseEditor, type: MARK_TYPE_ENUM, value?: CSS
 
 export const insertHref = (editor: ReactEditor, url: string) => {
     Transforms.insertNodes(editor, [
-        { link: { url, text: url }, children: [ {text: ''} ] },
+        {link: {url, text: url}, children: [ {text: ''} ]},
     ])
 }
 

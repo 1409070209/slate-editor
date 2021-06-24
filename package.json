@@ -33,7 +33,15 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
-    "fix": "tslint --fix -c ./tslint.json 'src/**/*{.ts,.tsx}'"
+    "fix": "eslint --fix --ext 'src/**/*{.ts,.tsx}'",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "yarn run fix",
+      "prettier --write",
+      "git add"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -55,6 +63,16 @@
   },
   "devDependencies": {
     "@ant-design/icons": "^4.6.2",
-    "@types/react-color": "^3.0.4"
+    "@types/react-color": "^3.0.4",
+    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/parser": "^4.28.0",
+    "eslint": "^7.29.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-autofix": "^1.0.5",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.1"
   }
 }

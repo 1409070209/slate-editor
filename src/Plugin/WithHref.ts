@@ -4,7 +4,7 @@ import {PARAGRAPH_TYPE_ENUM} from '../enum'
 import {hasType, insertHref, isUrl} from '../Util'
 
 const withHref = (editor: ReactEditor) => {
-    const { insertData, isVoid, normalizeNode, isInline, apply } = editor
+    const {insertData, isVoid, normalizeNode, isInline, apply} = editor
     editor.isVoid = element => {
         return hasType(element, [
             PARAGRAPH_TYPE_ENUM.image,

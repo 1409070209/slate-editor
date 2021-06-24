@@ -26,8 +26,8 @@ export default function Href(props: RenderElementProps): JSX.Element {
             const [node, at] = Editor.parent(editor, selection)
             if (!hasType(node, PARAGRAPH_TYPE_ENUM.link)) return
             Editor.withoutNormalizing(editor,() => {
-                Transforms.unsetNodes(editor, PARAGRAPH_TYPE_ENUM.link, { at })
-                Transforms.insertNodes(editor, { text: linkData.text }, { at })
+                Transforms.unsetNodes(editor, PARAGRAPH_TYPE_ENUM.link, {at})
+                Transforms.insertNodes(editor, {text: linkData.text}, {at})
             })
         }
     }
@@ -44,13 +44,13 @@ export default function Href(props: RenderElementProps): JSX.Element {
                 const [node, at] = Editor.parent(editor, selection)
                 if (hasType(node, PARAGRAPH_TYPE_ENUM.link)) {
                     Editor.withoutNormalizing(editor, () => {
-                        Transforms.delete(editor, { at: at })
+                        Transforms.delete(editor, {at: at})
                         Transforms.insertNodes(editor, [
                             {
-                                [PARAGRAPH_TYPE_ENUM.link]: { url: values.url, text: values.text },
+                                [PARAGRAPH_TYPE_ENUM.link]: {url: values.url, text: values.text},
                                 children: [ {text: ''} ]
                             }
-                        ], { at: at })
+                        ], {at: at})
                     })
                 }
             }

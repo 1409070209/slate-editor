@@ -1,3 +1,5 @@
+import './index.less'
+
 import {
     BgColorsOutlined,
     BoldOutlined, CameraOutlined,
@@ -6,21 +8,21 @@ import {
     OrderedListOutlined,
     UnderlineOutlined, UnorderedListOutlined
 } from '@ant-design/icons'
-import React, {useCallback, useMemo} from 'react'
-import {createEditor, Descendant} from 'slate'
-import {withHistory} from 'slate-history'
-import {Editable, ReactEditor, RenderElementProps, RenderLeafProps, Slate, withReact} from 'slate-react'
+import React, { useCallback, useMemo } from 'react'
+import { createEditor } from 'slate'
+import { withHistory } from 'slate-history'
+import { Editable, ReactEditor, RenderElementProps, RenderLeafProps, Slate, withReact } from 'slate-react'
+
 import BlockButton from '../ActionSection/BlockButton'
 import ColorButton from '../ActionSection/ColorButton'
 import ImageButton from '../ActionSection/ImageButton'
 import StyleButton from '../ActionSection/StyleButton'
-import {MARK_TYPE_ENUM, PARAGRAPH_TYPE_ENUM, PARAGRAPH_TYPE_LIST} from '../enum'
+import { MARK_TYPE_ENUM, PARAGRAPH_TYPE_ENUM, PARAGRAPH_TYPE_LIST } from '../enum'
 import keyDownHandle from '../KeyEvent'
 import withHref from '../Plugin/WithHref'
-import {hasType} from '../Util'
+import { hasType } from '../Util'
 import Href from './component/Href'
-import {ImageBlock} from './component/Image'
-import './index.less'
+import { ImageBlock } from './component/Image'
 import Leaf from './Leaf'
 
 const plugins = [
@@ -29,7 +31,7 @@ const plugins = [
     withHref
 ]
 
-export default function EditorSection (props: {nodes: Descendant[], setNodeList:(value: Descendant[]) => void}) {
+export default function EditorSection (props: any) {
     const {
         nodes, setNodeList
     } = props
@@ -70,9 +72,9 @@ export default function EditorSection (props: {nodes: Descendant[], setNodeList:
 
     return <div className={'slate-editor'}>
         <Slate value={nodes} editor={editor} onChange={setNodeList}>
-            <StyleButton icon={<BoldOutlined />} type={MARK_TYPE_ENUM.bold} value={{fontWeight: 'bold'}}/>
-            <StyleButton icon={<ItalicOutlined />} type={MARK_TYPE_ENUM.italic} value={{fontStyle: 'oblique'}}/>
-            <StyleButton icon={<UnderlineOutlined />} type={MARK_TYPE_ENUM.underline} value={{textDecoration: 'underline'}}/>
+            <StyleButton icon={<BoldOutlined />} type={MARK_TYPE_ENUM.bold} value={{ fontWeight: 'bold' }}/>
+            <StyleButton icon={<ItalicOutlined />} type={MARK_TYPE_ENUM.italic} value={{ fontStyle: 'oblique' }}/>
+            <StyleButton icon={<UnderlineOutlined />} type={MARK_TYPE_ENUM.underline} value={{ textDecoration: 'underline' }}/>
             <ColorButton type={MARK_TYPE_ENUM.color} icon={<FontColorsOutlined />} />
             <ColorButton type={MARK_TYPE_ENUM.background} icon={<BgColorsOutlined />} />
             <BlockButton icon={<OrderedListOutlined />} type={PARAGRAPH_TYPE_ENUM.orderList} value={[]} />
