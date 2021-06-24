@@ -1,11 +1,13 @@
-import React, {CSSProperties} from 'react'
-import {RenderLeafProps} from 'slate-react'
-import {MARK_TYPE_ENUM} from '../enum'
+import React, { CSSProperties } from 'react'
+import { RenderLeafProps } from 'slate-react'
+
+import { MARK_TYPE_ENUM } from '../enum'
 import Href from './component/Href'
 
+console.log(123)
 // TODO 应该把link转换成文本节点规避BUG
 export default function Leaf(props: RenderLeafProps): JSX.Element {
-    let {attributes, children, leaf} = props
+    let { attributes, children, leaf } = props
     let cssProperties: CSSProperties = {}
     if (!children) children = <></>
     if (leaf[MARK_TYPE_ENUM.bold]) {
