@@ -1,6 +1,4 @@
-#!/bin/sh
-
-git filter-branch --env-filter '
+git filter-branch -f --env-filter '
 OLD_EMAIL="leinuo14212@ipalfish.com"
 CORRECT_NAME="leinuo"
 CORRECT_EMAIL="1142908626@qq.com"
