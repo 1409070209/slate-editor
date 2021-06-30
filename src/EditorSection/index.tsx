@@ -11,7 +11,16 @@ import {
 import React, { useCallback, useMemo } from 'react'
 import { createEditor } from 'slate'
 import { withHistory } from 'slate-history'
-import { Editable, ReactEditor, RenderElementProps, RenderLeafProps, Slate, withReact } from 'slate-react'
+import {
+    Editable,
+    ReactEditor,
+    RenderElementProps,
+    RenderLeafProps,
+    Slate,
+    useFocused,
+    useSelected,
+    withReact
+} from 'slate-react'
 
 import BlockButton from '../ActionSection/BlockButton'
 import ColorButton from '../ActionSection/ColorButton'
@@ -70,6 +79,8 @@ export default function EditorSection (props: any) {
         return <Leaf {...props} children={props.children}/>
     }, [])
 
+    console.log(useSelected(), useFocused())
+
     return <div className={'slate-editor'}>
         <Slate value={nodes} editor={editor} onChange={setNodeList}>
             <StyleButton icon={<BoldOutlined />} type={MARK_TYPE_ENUM.bold} value={{ fontWeight: 'bold' }}/>
@@ -81,7 +92,8 @@ export default function EditorSection (props: any) {
             <BlockButton icon={<UnorderedListOutlined />} type={PARAGRAPH_TYPE_ENUM.unOrderList} value={[]} />
             <ImageButton icon={<CameraOutlined />} type={PARAGRAPH_TYPE_ENUM.image} />
             <hr/>
-            <Editable className={'slate-editor-context'}
+            <Editable
+                className={'slate-editor-context'}
                 renderElement={render}
                 renderLeaf={renderLeaf}
                 onKeyDown={event => keyDownHandle(event, editor)}

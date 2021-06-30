@@ -17,7 +17,7 @@ export const hasListType = (node: BaseElement) => {
 }
 
 export const getParagraphTypes = (node: BaseElement) => {
-    const ans = []
+    const ans: string[] = []
     for (const type in PARAGRAPH_TYPE_ENUM) {
         if (hasType(node, type as PARAGRAPH_TYPE_ENUM)) {
             ans.push(type)
@@ -27,7 +27,7 @@ export const getParagraphTypes = (node: BaseElement) => {
 }
 
 export const getLeafTypes = (node: BaseText) => {
-    const ans = []
+    const ans: string[] = []
     for (const type in MARK_TYPE_ENUM) {
         if (getMark(node, type as MARK_TYPE_ENUM)) {
             ans.push(type)

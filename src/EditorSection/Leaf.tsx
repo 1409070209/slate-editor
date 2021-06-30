@@ -3,8 +3,6 @@ import { RenderLeafProps } from 'slate-react'
 
 import { MARK_TYPE_ENUM } from '../enum'
 
-console.log(123)
-// TODO 应该把link转换成文本节点规避BUG
 export default function Leaf(props: RenderLeafProps): JSX.Element {
     let { attributes, children, leaf } = props
     let cssProperties: CSSProperties = {}
