@@ -8,3 +8,6 @@ then
     export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
 fi
 ' --tag-name-filter cat -- --branches --tags
+git config --global user.email leinuo14212@ipalfish.com
+git config --global user.name leinuo14212
+

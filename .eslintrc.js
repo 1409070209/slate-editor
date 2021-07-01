@@ -6,8 +6,7 @@ module.exports = {
     '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
     'object-curly-spacing': ['error', 'always'],
     'simple-import-sort/imports': 'error',
-    'simple-import-sort/exports': 'error',
-    '@typescript-eslint/no-unused-vars': 'warn'
+    'simple-import-sort/exports': 'error'
   },
   env: {
     browser: true,

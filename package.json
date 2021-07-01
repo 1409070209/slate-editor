@@ -32,6 +32,8 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "postbuild": "yarn doc",
+    "doc": "rm -rf docs && cp -r build/ docs",
     "test": "craco test",
     "eject": "craco eject",
     "eslint": "eslint --ext .tsx,.ts --fix ./src",
