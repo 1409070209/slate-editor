@@ -1,5 +1,5 @@
 #!/bin/sh
-
+##git filter-branch -f --index-filter 'git rm --cached --ignore-unmatch Rakefile' HEAD
 git filter-branch --env-filter '
 
 OLD_EMAIL="leinuo14212@ipalfish.com"
