@@ -34,11 +34,11 @@ export default function ImageButton(props: IImageButtonProps): JSX.Element {
         setUrl('')
     }
     return <>
+        <Button icon={icon} onMouseDown={mouseDownHandle} type={'text'}>{type}</Button>
         <Modal title={'请输入图片url'} visible={visible} onOk={onOk} onCancel={() => setVisible(false)} getContainer={false}>
             <Input placeholder={'请输入图片url'} onChange={e => {
                 setUrl(e.target.value)}
             } value={url}/>
         </Modal>
-        <Button icon={icon} onMouseDown={mouseDownHandle} type={'text'}>{type}</Button>
     </>
 }

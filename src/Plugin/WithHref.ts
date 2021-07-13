@@ -11,6 +11,7 @@ const withHref = <T extends ReactEditor>(editor: T) => {
         return hasType(element, [
             PARAGRAPH_TYPE_ENUM.image,
             PARAGRAPH_TYPE_ENUM.link,
+            PARAGRAPH_TYPE_ENUM.code
         ]) ? true : isVoid(element)
     }
     editor.isInline = element => {

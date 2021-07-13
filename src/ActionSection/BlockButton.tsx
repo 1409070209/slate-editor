@@ -8,9 +8,9 @@ import { hasType } from '../Util'
 import { hasListType, paragraphChildrenType } from '../Util/paragraph'
 
 
-export interface IComponentButtonProps {
+export interface IBlockButtonProps {
     type: PARAGRAPH_TYPE_ENUM,
-    value: object[],
+    value: object,
     icon?: React.ReactNode
 }
 
@@ -63,7 +63,7 @@ const switchBlockType = (editor: BaseEditor, type: PARAGRAPH_TYPE_ENUM, value: o
     }
 
 }
-export default function BlockButton(props: IComponentButtonProps): JSX.Element {
+export default function BlockButton(props: IBlockButtonProps): JSX.Element {
     const {
         type, value, icon
     } = props

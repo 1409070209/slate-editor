@@ -24,6 +24,9 @@ export interface IImageProps extends BaseTypeProps {
 export interface IListItem extends BaseTypeProps {
     children?: BaseText[]
 }
+export interface ICodeItem extends BaseTypeProps {
+    lang?: string
+}
 declare module 'slate' {
     // 将BaseElement.type重构成BaseText那样支持参数的样子
     export interface BaseElement {
@@ -32,6 +35,7 @@ declare module 'slate' {
         unOrderList?: BaseTypeProps | []
         image?: IImageProps
         link?: IHrefProps,
+        code?: ICodeItem
     }
     export interface BaseText {
         bold?: CSSProperties

@@ -13,6 +13,7 @@ export enum PARAGRAPH_TYPE_ENUM {
     unOrderList = 'unOrderList',
     image = 'image',
     link = 'link',
+    code = 'code'
 }
 
 const PARAGRAPH_TYPE_LIST: string[] = []

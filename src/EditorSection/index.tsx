@@ -2,34 +2,28 @@ import './index.less'
 
 import {
     BgColorsOutlined,
-    BoldOutlined, CameraOutlined,
+    BoldOutlined, CameraOutlined, CodeOutlined,
     FontColorsOutlined,
     ItalicOutlined,
     OrderedListOutlined,
-    UnderlineOutlined, UnorderedListOutlined
+    UnderlineOutlined,
+    UnorderedListOutlined
 } from '@ant-design/icons'
 import React, { useCallback, useMemo } from 'react'
 import { createEditor } from 'slate'
 import { withHistory } from 'slate-history'
-import {
-    Editable,
-    ReactEditor,
-    RenderElementProps,
-    RenderLeafProps,
-    Slate,
-    useFocused,
-    useSelected,
-    withReact
-} from 'slate-react'
+import { Editable, ReactEditor, RenderElementProps, RenderLeafProps, Slate, withReact } from 'slate-react'
 
 import BlockButton from '../ActionSection/BlockButton'
 import ColorButton from '../ActionSection/ColorButton'
+import ComponentButton from '../ActionSection/ComponentButton'
 import ImageButton from '../ActionSection/ImageButton'
 import StyleButton from '../ActionSection/StyleButton'
 import { MARK_TYPE_ENUM, PARAGRAPH_TYPE_ENUM, PARAGRAPH_TYPE_LIST } from '../enum'
 import keyDownHandle from '../KeyEvent'
 import withHref from '../Plugin/WithHref'
 import { hasType } from '../Util'
+import CodeHighLight from './component/CodeHighLight'
 import Href from './component/Href'
 import { ImageBlock } from './component/Image'
 import Leaf from './Leaf'
@@ -61,6 +55,9 @@ export default function EditorSection (props: any) {
         if (element[PARAGRAPH_TYPE_ENUM.link]) {
             children = <Href {...props} children={props.children} />
         }
+        if (element[PARAGRAPH_TYPE_ENUM.code]) {
+            children = <CodeHighLight {...props}>{children}</CodeHighLight>
+        }
         if (element[PARAGRAPH_TYPE_ENUM.orderList]) {
             children = <ol {...attributes}>{children}</ol>
         }
@@ -79,7 +76,6 @@ export default function EditorSection (props: any) {
         return <Leaf {...props} children={props.children}/>
     }, [])
 
-    console.log(useSelected(), useFocused())
 
     return <div className={'slate-editor'}>
         <Slate value={nodes} editor={editor} onChange={setNodeList}>
@@ -90,6 +86,7 @@ export default function EditorSection (props: any) {
             <ColorButton type={MARK_TYPE_ENUM.background} icon={<BgColorsOutlined />} />
             <BlockButton icon={<OrderedListOutlined />} type={PARAGRAPH_TYPE_ENUM.orderList} value={[]} />
             <BlockButton icon={<UnorderedListOutlined />} type={PARAGRAPH_TYPE_ENUM.unOrderList} value={[]} />
+            <ComponentButton icon={<CodeOutlined />} type={PARAGRAPH_TYPE_ENUM.code} value={{ lang: 'js' }} />
             <ImageButton icon={<CameraOutlined />} type={PARAGRAPH_TYPE_ENUM.image} />
             <hr/>
             <Editable
